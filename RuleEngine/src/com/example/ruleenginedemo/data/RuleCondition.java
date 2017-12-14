@@ -66,6 +66,4 @@ public class RuleCondition {
 		this.dateTimeValue = dateTimeValue;
 	}
 
-	
-
 }

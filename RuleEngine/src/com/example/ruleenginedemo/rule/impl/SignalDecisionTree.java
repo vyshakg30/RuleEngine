@@ -1,12 +1,13 @@
 package com.example.ruleenginedemo.rule.impl;
 
-import java.sql.Timestamp;
 import java.util.HashMap;
 
 import com.example.ruleenginedemo.data.ConditionType;
 import com.example.ruleenginedemo.data.RuleCondition;
 import com.example.ruleenginedemo.data.Signal;
+import com.example.ruleenginedemo.data.StringHelper;
 import com.example.ruleenginedemo.data.ValueType;
+import com.example.ruleenginedemo.input.data.SignalSource;
 import com.example.ruleenginedemo.rule.DecisionTree;
 
 public class SignalDecisionTree implements DecisionTree {
@@ -43,36 +44,62 @@ public class SignalDecisionTree implements DecisionTree {
 	}
 
 	private boolean addDateTimeValueRule(RuleCondition ruleCondition, Signal signal) {
-		ValueType<Timestamp> dateTime;
+
+		ValueType<String> dateTimeInString = signal.getDateTimeInStringValueType();
+		String value = ruleCondition.getStringValue();
+
+		if (ruleCondition.getLimitType() == ConditionType.FORBIDDEN) {
+			dateTimeInString.getForbiddenValueSet().add(value);
+			return true;
+		}
+
+		if (ruleCondition.getLimitType() == ConditionType.EXCLUSIVE) {
+			dateTimeInString.getExclusivelyAllowedValueSet().add(value);
+			return true;
+		}
+
 		return false;
 	}
 
 	private boolean addStringValueRule(RuleCondition ruleCondition, Signal signal) {
-		ValueType<String> string;
+
+		ValueType<String> string = signal.getStringValueType();
+		String value = ruleCondition.getStringValue();
+
+		if (ruleCondition.getLimitType() == ConditionType.FORBIDDEN) {
+			string.getForbiddenValueSet().add(value);
+			return true;
+		}
+
+		if (ruleCondition.getLimitType() == ConditionType.EXCLUSIVE) {
+			string.getExclusivelyAllowedValueSet().add(value);
+			return true;
+		}
+
 		return false;
 	}
 
 	public boolean addIntegerValueRule(RuleCondition ruleCondition, Signal signal) {
 
-		ValueType<Double> integer = signal.getInteger();
+		ValueType<Double> integer = signal.getIntegerValueType();
 		Double val = ruleCondition.getIntegerValue();
 
-		if (ruleCondition.getLimitType() == ConditionType.LOWER) {
+		if (ruleCondition.getLimitType() == ConditionType.LOWERLIMIT) {
 
 			Double lowerLimit = integer.getLowerLimitValue();
 
 			if (lowerLimit == null || val < lowerLimit)
-				lowerLimit = new Double(val.doubleValue());
+				integer.setLowerLimitValue(new Double(val.doubleValue()));
 
 			return true;
 		}
 
-		if (ruleCondition.getLimitType() == ConditionType.HIGHER) {
+		if (ruleCondition.getLimitType() == ConditionType.UPPERLIMIT) {
 
 			Double upperLimit = integer.getUpperLimitValue();
 
 			if (upperLimit == null || val > upperLimit)
-				upperLimit = new Double(val.doubleValue());
+				integer.setUpperLimitValue(new Double(val.doubleValue()));
 
 			return true;
 		}
@@ -86,6 +113,68 @@ public class SignalDecisionTree implements DecisionTree {
 			integer.getExclusivelyAllowedValueSet().add(ruleCondition.getIntegerValue());
 			return true;
 		}
+
+		return false;
+	}
+
+	public boolean violatesAnyRule(SignalSource querySignal) {
+
+		Signal signalFromTree = signalsRoot.get(querySignal.getSourceID());
+
+		if (signalFromTree == null)
+			return false;
+
+		switch (querySignal.getDataType()) {
+		case StringHelper.INTEGERTYPE:
+			return violatesAnyIntegerRule(signalFromTree, querySignal.getValue());
+		case StringHelper.STRINGTYPE:
+			return violatesAnyStringRule(signalFromTree, querySignal.getValue());
+		case StringHelper.DATETIMETYPE:
+			return violatesAnyDateTimeRule(signalFromTree, querySignal.getValue());
+
+		}
+
+		return false;
+	}
+
+	public boolean violatesAnyIntegerRule(Signal signalFromTree, String queryValue) {
+
+		ValueType<Double> integerType = signalFromTree.getIntegerValueType();
+		Double queryValueDouble = Double.parseDouble(queryValue);
+
+		if (integerType.getExclusivelyAllowedValueSet().size() > 0
+				&& !integerType.getExclusivelyAllowedValueSet().contains(queryValueDouble))
+			return true;
+
+		if (integerType.getForbiddenValueSet().contains(queryValueDouble))
+			return true;
+
+		if (integerType.getLowerLimitValue() != null && queryValueDouble > integerType.getLowerLimitValue())
+			return true;
+
+		if (integerType.getUpperLimitValue() != null && queryValueDouble < integerType.getUpperLimitValue())
+			return true;
+
+		return false;
+	}
+
+	public boolean violatesAnyStringRule(Signal signalFromTree, String queryValue) {
+
+		ValueType<String> stringType = signalFromTree.getStringValueType();
+
+		if (stringType.getExclusivelyAllowedValueSet().size() > 0
+				&& !stringType.getExclusivelyAllowedValueSet().contains(queryValue))
+			return true;
+
+		if (stringType.getForbiddenValueSet().contains(queryValue))
+			return true;
+
+		return false;
+	}
+
+	public boolean violatesAnyDateTimeRule(Signal signalFromTree, String queryValue) {
+
+		ValueType<String> dateStringType = signalFromTree.getDateTimeInStringValueType();
 
 		return false;
 	}

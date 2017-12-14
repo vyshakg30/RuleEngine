@@ -6,15 +6,17 @@ public class Signal {
 
 	String sourceID;
 
-	ValueType<Double> integer;
-	ValueType<String> string;
-	ValueType<Timestamp> dateTime;
+	ValueType<Double> integerType;
+	ValueType<String> stringType;
+	ValueType<Timestamp> dateTimeType;
+	ValueType<String> dateTimeStringType;
 
 	public Signal(String sourceID) {
 		this.sourceID = sourceID;
-		integer = new ValueType<Double>();
-		string = new ValueType<String>();
-		dateTime = new ValueType<Timestamp>();
+		integerType = new ValueType<Double>();
+		stringType = new ValueType<String>();
+		dateTimeType = new ValueType<Timestamp>();
+		dateTimeStringType = new ValueType<String>();
 	}
 
 	public String getSourceID() {
@@ -25,28 +27,36 @@ public class Signal {
 		this.sourceID = sourceID;
 	}
 
-	public ValueType<Double> getInteger() {
-		return integer;
+	public ValueType<Double> getIntegerValueType() {
+		return integerType;
 	}
 
-	public void setInteger(ValueType<Double> integer) {
-		this.integer = integer;
+	public void setIntegerValueType(ValueType<Double> integer) {
+		this.integerType = integer;
 	}
 
-	public ValueType<String> getString() {
-		return string;
+	public ValueType<String> getStringValueType() {
+		return stringType;
 	}
 
-	public void setString(ValueType<String> string) {
-		this.string = string;
+	public void setStringValueType(ValueType<String> string) {
+		this.stringType = string;
 	}
 
-	public ValueType<Timestamp> getDateTime() {
-		return dateTime;
+	public ValueType<Timestamp> getDateTimeValueType() {
+		return dateTimeType;
 	}
 
-	public void setDateTime(ValueType<Timestamp> dateTime) {
-		this.dateTime = dateTime;
+	public void setDateTimeValueType(ValueType<Timestamp> dateTime) {
+		this.dateTimeType = dateTime;
+	}
+
+	public ValueType<String> getDateTimeInStringValueType() {
+		return dateTimeStringType;
+	}
+
+	public void setDateTimeInStringValueType(ValueType<String> dateTimeString) {
+		this.dateTimeStringType = dateTimeString;
 	}
 
 }

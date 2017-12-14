@@ -46,7 +46,4 @@ public class ValueType<T> {
 		this.exclusivelyAllowedValues = exclusivelyAllowedValues;
 	}
 
-	
-	
-	
 }

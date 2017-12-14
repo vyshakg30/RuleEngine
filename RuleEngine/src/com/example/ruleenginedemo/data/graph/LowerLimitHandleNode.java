@@ -26,7 +26,7 @@ public class LowerLimitHandleNode extends SentenceNode {
 
 		ruleCondition.setSourceID(sourceID);
 		ruleCondition.setDataType(ConditionType.INTEGER);
-		ruleCondition.setLimitType(ConditionType.LOWER);
+		ruleCondition.setLimitType(ConditionType.LOWERLIMIT);
 		ruleCondition.setIntegerValue(doubleValue);
 
 		return ruleCondition;

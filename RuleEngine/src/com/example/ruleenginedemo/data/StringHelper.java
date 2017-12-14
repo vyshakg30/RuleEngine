@@ -1,7 +1,11 @@
 package com.example.ruleenginedemo.data;
 
 public class StringHelper {
-	public static final String SPLITLITERALS = " ,:.";
+	public static final String SPLITLITERALS = " ";
+
+	public static final String INTEGERTYPE = "integer";
+	public static final String STRINGTYPE = "string";
+	public static final String DATETIMETYPE = "datetime";
 
 	public static final String[] STRINGTYPEVALUES = { "high", "medium", "low" };
 	public static final String[] DATETIMETYPEVALUES = { "future", "past" };
