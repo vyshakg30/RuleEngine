@@ -1,8 +1,8 @@
 package com.ruleenginedemo.rule.impl;
 
 import com.ruleenginedemo.rule.ParseGraph;
-import com.ruleenginedemo.rule.data.RuleCondition;
-import com.ruleenginedemo.rule.data.StringHelper;
+import com.ruleenginedemo.rule.model.data.RuleCondition;
+import com.ruleenginedemo.rule.model.data.StringHelper;
 import com.ruleenginedemo.rule.parsegraph.impl.LowerLimitHandleNode;
 import com.ruleenginedemo.rule.parsegraph.impl.NegativeAffirmitiveNode;
 import com.ruleenginedemo.rule.parsegraph.impl.PostiveAffirmitiveNode;
@@ -15,7 +15,6 @@ public class SentenceParseGraph implements ParseGraph {
 
 	public SentenceParseGraph() {
 		constructTree();
-
 	}
 
 	private void constructTree() {
@@ -42,16 +41,13 @@ public class SentenceParseGraph implements ParseGraph {
 		// cross path
 		positiveAffirmitiveNode.addPath(StringHelper.NEGATIVEWORDS, negativeAffirmitiveNode);
 		negativeAffirmitiveNode.addPath(StringHelper.NEGATIVEWORDS, positiveAffirmitiveNode);
-
 		negativeAffirmitiveNode.addPath(StringHelper.TRICKYWORDS, rootNode);
 
 	}
 
 	public RuleCondition getRuleCondition(String ruleSentence) {
-		return getRuleCondition(ruleSentence.split(StringHelper.SPLITLITERALS));
-	}
 
-	public RuleCondition getRuleCondition(String[] ruleSentenceTokens) {
+		String[] ruleSentenceTokens = ruleSentence.split(StringHelper.SPLITLITERALS);
 
 		if (!StringHelper.isAlphaNumeric(ruleSentenceTokens[0]))
 			return null;

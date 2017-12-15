@@ -2,9 +2,9 @@ package com.ruleenginedemo.rule.parsegraph.impl;
 
 import java.util.Arrays;
 
-import com.ruleenginedemo.rule.data.ConditionType;
-import com.ruleenginedemo.rule.data.RuleCondition;
-import com.ruleenginedemo.rule.data.StringHelper;
+import com.ruleenginedemo.rule.model.data.ConditionType;
+import com.ruleenginedemo.rule.model.data.RuleCondition;
+import com.ruleenginedemo.rule.model.data.StringHelper;
 
 public class NegativeAffirmitiveNode extends SentenceNode {
 

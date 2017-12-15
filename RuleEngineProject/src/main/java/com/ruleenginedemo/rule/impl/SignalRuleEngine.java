@@ -2,7 +2,7 @@ package com.ruleenginedemo.rule.impl;
 
 import com.ruleenginedemo.input.data.SignalSource;
 import com.ruleenginedemo.rule.RuleEngine;
-import com.ruleenginedemo.rule.data.RuleCondition;
+import com.ruleenginedemo.rule.model.data.RuleCondition;
 
 public class SignalRuleEngine implements RuleEngine {
 

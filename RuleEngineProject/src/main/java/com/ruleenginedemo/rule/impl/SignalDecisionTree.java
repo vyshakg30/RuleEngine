@@ -5,9 +5,9 @@ import java.util.HashMap;
 
 import com.ruleenginedemo.input.data.SignalSource;
 import com.ruleenginedemo.rule.DecisionTree;
-import com.ruleenginedemo.rule.data.ConditionType;
-import com.ruleenginedemo.rule.data.RuleCondition;
-import com.ruleenginedemo.rule.data.StringHelper;
+import com.ruleenginedemo.rule.model.data.ConditionType;
+import com.ruleenginedemo.rule.model.data.RuleCondition;
+import com.ruleenginedemo.rule.model.data.StringHelper;
 import com.ruleenginedemo.rule.tree.impl.Signal;
 import com.ruleenginedemo.rule.tree.impl.ValueType;
 

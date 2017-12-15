@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import com.ruleenginedemo.rule.data.RuleCondition;
+import com.ruleenginedemo.rule.model.data.RuleCondition;
 import com.ruleenginedemo.rule.parsegraph.GraphNode;
 
 public class SentenceNode implements GraphNode {

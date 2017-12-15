@@ -1,8 +1,8 @@
 package com.ruleenginedemo.main.control;
 
 import com.ruleenginedemo.input.data.SignalSource;
-import com.ruleenginedemo.rule.data.StringHelper;
 import com.ruleenginedemo.rule.impl.SignalRuleEngine;
+import com.ruleenginedemo.rule.model.data.StringHelper;
 
 public class DataStreamApp {
 
