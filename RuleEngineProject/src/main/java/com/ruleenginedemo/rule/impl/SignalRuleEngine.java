@@ -14,6 +14,7 @@ public class SignalRuleEngine implements RuleEngine {
 		sentenceParseGraph = new SentenceParseGraph();
 	}
 
+	@Override
 	public boolean addRule(String ruleSentence) {
 
 		RuleCondition ruleCondition;
@@ -24,6 +25,7 @@ public class SignalRuleEngine implements RuleEngine {
 		return false;
 	}
 
+	@Override
 	public boolean violatesAnyRule(SignalSource querySignal) {
 
 		return signalDecisionTree.violatesAnyRule(querySignal);
