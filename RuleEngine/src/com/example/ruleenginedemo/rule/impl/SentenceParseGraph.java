@@ -1,8 +1,5 @@
 package com.example.ruleenginedemo.rule.impl;
 
-import java.util.List;
-import java.util.Set;
-
 import com.example.ruleenginedemo.data.RuleCondition;
 import com.example.ruleenginedemo.data.StringHelper;
 import com.example.ruleenginedemo.data.graph.LowerLimitHandleNode;
@@ -56,26 +53,19 @@ public class SentenceParseGraph implements ParseGraph {
 
 	public RuleCondition getRuleCondition(String[] ruleSentenceTokens) {
 
-		SentenceNode currentNode = rootNode;
-
 		if (!StringHelper.isAlphaNumeric(ruleSentenceTokens[0]))
 			return null;
 
-		// Traverse Graph to find final node
-		Set<List<String>> connectionSet = currentNode.getConnections().keySet();
+		SentenceNode currentNode = rootNode;
+
 		for (String ruleSentenceToken : ruleSentenceTokens)
-			for (List<String> edge : connectionSet)
-				if (edge.contains(ruleSentenceToken)) {
-					currentNode = currentNode.getConnections().get(edge);
-					connectionSet = currentNode.getConnections().keySet();
-				}
-		// End of Traversal
+			currentNode = currentNode.getNextNode(ruleSentenceToken);
 
 		int lastIndex = ruleSentenceTokens.length;
 		String value = ruleSentenceTokens[lastIndex - 1];
 		String sourceID = ruleSentenceTokens[0];
 
-		return currentNode.formRule(value, sourceID);
+		return currentNode.formRuleCondition(value, sourceID);
 
 	}
 

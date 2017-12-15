@@ -4,54 +4,26 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import com.example.ruleenginedemo.data.ConditionType;
 import com.example.ruleenginedemo.data.RuleCondition;
 
 public class SentenceNode implements GraphNode {
 
 	String name;
-	boolean isLeaf;
 	HashMap<List<String>, SentenceNode> connections;
-	ConditionType type;
 
 	public SentenceNode() {
-		connections = new HashMap<>();
-		type = ConditionType.UNKNOWN;
+		super();
+		initialize();
 	}
 
 	public SentenceNode(String name) {
-		this.name = name;
-		connections = new HashMap<>();
-		type = ConditionType.UNKNOWN;
-	}
-
-	public SentenceNode(String name, ConditionType type) {
 		super();
 		this.name = name;
-		this.type = type;
+		initialize();
+	}
+
+	private void initialize() {
 		connections = new HashMap<>();
-	}
-
-	public SentenceNode(ConditionType type) {
-		super();
-		this.type = type;
-		connections = new HashMap<>();
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public boolean isLeaf() {
-		return isLeaf;
-	}
-
-	public void setLeaf(boolean isLeaf) {
-		this.isLeaf = isLeaf;
 	}
 
 	public HashMap<List<String>, SentenceNode> getConnections() {
@@ -72,16 +44,18 @@ public class SentenceNode implements GraphNode {
 
 	}
 
-	public ConditionType getType() {
-		return type;
-	}
-
-	public void setType(ConditionType type) {
-		this.type = type;
-	}
-
-	public RuleCondition formRule(String value, String sourceID) {
+	@Override
+	public RuleCondition formRuleCondition(String value, String sourceID) {
 		return null;
 	}
+
+	public SentenceNode getNextNode(String edgeValue) {
+
+		for (List<String> edge : connections.keySet())
+			if (edge.contains(edgeValue))
+				return connections.get(edge);
+
+		return this;
+	};
 
 }

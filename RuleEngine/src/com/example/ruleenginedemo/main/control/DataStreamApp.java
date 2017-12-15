@@ -1,5 +1,6 @@
 package com.example.ruleenginedemo.main.control;
 
+import com.example.ruleenginedemo.data.StringHelper;
 import com.example.ruleenginedemo.input.data.SignalSource;
 import com.example.ruleenginedemo.rule.impl.SignalRuleEngine;
 
@@ -13,11 +14,9 @@ public class DataStreamApp {
 
 		signalRuleEngine.addRule("lt1 value should not be 2");
 		signalRuleEngine.addRule("lt1 value should not be 3");
-
 		signalRuleEngine.addRule("lt1 value should only be high");
 		signalRuleEngine.addRule("lt1 value should only be medium");
-
-		signalRuleEngine.addRule("lt2 value must never be low");
+		signalRuleEngine.addRule("lt2 value must  be low");
 
 		System.out.println(signalRuleEngine.violatesAnyRule(new SignalSource("lt1", "2", "integer")));
 		System.out.println(signalRuleEngine.violatesAnyRule(new SignalSource("lt1", "3", "integer")));
@@ -29,6 +28,25 @@ public class DataStreamApp {
 		System.out.println(signalRuleEngine.violatesAnyRule(new SignalSource("lt1", "medium", "string")));
 
 		System.out.println(signalRuleEngine.violatesAnyRule(new SignalSource("lt2", "low", "string")));
+
+		System.out.println("Time check");
+
+		signalRuleEngine.addRule("lt3 value must be future");
+		signalRuleEngine.addRule("lt4 value must not be future");
+		signalRuleEngine.addRule("lt5 value must not be in past");
+		signalRuleEngine.addRule("lt6 value must be in past");
+		signalRuleEngine.addRule("lt7 value must be in future");
+
+		System.out.println(signalRuleEngine
+				.violatesAnyRule(new SignalSource("lt3", "2018-04-10 10:16:55", StringHelper.DATETIMETYPE)));
+		System.out.println(signalRuleEngine
+				.violatesAnyRule(new SignalSource("lt4", "2018-04-10 10:16:55", StringHelper.DATETIMETYPE)));
+		System.out.println(signalRuleEngine
+				.violatesAnyRule(new SignalSource("lt5", "2016-04-10 10:16:55", StringHelper.DATETIMETYPE)));
+		System.out.println(signalRuleEngine
+				.violatesAnyRule(new SignalSource("lt6", "2015-04-10 10:16:55", StringHelper.DATETIMETYPE)));
+		System.out.println(signalRuleEngine
+				.violatesAnyRule(new SignalSource("lt6", "2019-04-10 10:16:55", StringHelper.DATETIMETYPE)));
 
 	}
 

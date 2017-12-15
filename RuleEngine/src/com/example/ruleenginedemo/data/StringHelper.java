@@ -1,11 +1,21 @@
 package com.example.ruleenginedemo.data;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class StringHelper {
 	public static final String SPLITLITERALS = " ";
 
 	public static final String INTEGERTYPE = "integer";
 	public static final String STRINGTYPE = "string";
+
+	public static final String TIMEFORMAT = "yyyy-MM-dd hh:mm:ss";
 	public static final String DATETIMETYPE = "datetime";
+	public static final String DATETIMEFUTURE = "future";
+	public static final String DATETIMEPAST = "past";
 
 	public static final String[] STRINGTYPEVALUES = { "high", "medium", "low" };
 	public static final String[] DATETIMETYPEVALUES = { "future", "past" };
@@ -31,4 +41,27 @@ public class StringHelper {
 		}
 		return true;
 	}
+
+	public static Timestamp convertStringToTimestamp(String stringTimeStamp) {
+		try {
+			DateFormat dateFormatter = new SimpleDateFormat(TIMEFORMAT);
+			Date date = dateFormatter.parse(stringTimeStamp);
+			return new java.sql.Timestamp(date.getTime());
+		} catch (ParseException e) {
+			System.out.println("Exception :" + e);
+			return null;
+		}
+	}
+
+	public static Date convertStringToDate(String stringTimeStamp) {
+		try {
+			DateFormat dateFormatter = new SimpleDateFormat(TIMEFORMAT);
+			return dateFormatter.parse(stringTimeStamp);
+			
+		} catch (ParseException e) {
+			System.out.println("Exception :" + e);
+			return null;
+		}
+	}
+
 }

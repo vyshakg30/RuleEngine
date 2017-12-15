@@ -17,7 +17,7 @@ public class UpperLimitHandleNode extends SentenceNode {
 	}
 
 	@Override
-	public RuleCondition formRule(String value, String sourceID) {
+	public RuleCondition formRuleCondition(String value, String sourceID) {
 
 		if (!StringHelper.isNumeric(value))
 			return null;

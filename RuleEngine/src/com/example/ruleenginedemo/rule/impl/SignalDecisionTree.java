@@ -1,12 +1,13 @@
 package com.example.ruleenginedemo.rule.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import com.example.ruleenginedemo.data.ConditionType;
 import com.example.ruleenginedemo.data.RuleCondition;
-import com.example.ruleenginedemo.data.Signal;
 import com.example.ruleenginedemo.data.StringHelper;
-import com.example.ruleenginedemo.data.ValueType;
+import com.example.ruleenginedemo.data.tree.Signal;
+import com.example.ruleenginedemo.data.tree.ValueType;
 import com.example.ruleenginedemo.input.data.SignalSource;
 import com.example.ruleenginedemo.rule.DecisionTree;
 
@@ -87,11 +88,10 @@ public class SignalDecisionTree implements DecisionTree {
 		if (ruleCondition.getLimitType() == ConditionType.LOWERLIMIT) {
 
 			Double lowerLimit = integer.getLowerLimitValue();
-
 			if (lowerLimit == null || val < lowerLimit)
 				integer.setLowerLimitValue(new Double(val.doubleValue()));
-
 			return true;
+
 		}
 
 		if (ruleCondition.getLimitType() == ConditionType.UPPERLIMIT) {
@@ -175,8 +175,38 @@ public class SignalDecisionTree implements DecisionTree {
 	public boolean violatesAnyDateTimeRule(Signal signalFromTree, String queryValue) {
 
 		ValueType<String> dateStringType = signalFromTree.getDateTimeInStringValueType();
+		Date queryDate = StringHelper.convertStringToDate(queryValue);
+		Date currentDate = new Date();
+
+		for (String dateRelatedValue : dateStringType.getExclusivelyAllowedValueSet())
+			switch (dateRelatedValue) {
+
+			case StringHelper.DATETIMEFUTURE:
+				if (!queryDate.after(currentDate))
+					return true;
+				break;
+
+			case StringHelper.DATETIMEPAST:
+				if (!queryDate.before(currentDate))
+					return true;
+
+			}
+
+		for (String dateRelatedValue : dateStringType.getForbiddenValueSet())
+			switch (dateRelatedValue) {
+
+			case StringHelper.DATETIMEFUTURE:
+				if (queryDate.after(currentDate))
+					return true;
+				break;
+			case StringHelper.DATETIMEPAST:
+				if (queryDate.before(currentDate))
+					return true;
+
+			}
 
 		return false;
 	}
 
+	
 }
