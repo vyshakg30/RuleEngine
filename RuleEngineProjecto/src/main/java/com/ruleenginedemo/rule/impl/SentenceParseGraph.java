@@ -3,11 +3,11 @@ package com.ruleenginedemo.rule.impl;
 import com.ruleenginedemo.rule.ParseGraph;
 import com.ruleenginedemo.rule.model.data.RuleCondition;
 import com.ruleenginedemo.rule.model.data.StringHelper;
-import com.ruleenginedemo.rule.parsegraph.impl.LowerLimitHandleNode;
-import com.ruleenginedemo.rule.parsegraph.impl.NegativeAffirmitiveNode;
-import com.ruleenginedemo.rule.parsegraph.impl.PostiveAffirmitiveNode;
-import com.ruleenginedemo.rule.parsegraph.impl.SentenceNode;
-import com.ruleenginedemo.rule.parsegraph.impl.UpperLimitHandleNode;
+import com.ruleenginedemo.rule.model.parsegraph.impl.LowerLimitHandleNode;
+import com.ruleenginedemo.rule.model.parsegraph.impl.NegativeAffirmitiveNode;
+import com.ruleenginedemo.rule.model.parsegraph.impl.PostiveAffirmitiveNode;
+import com.ruleenginedemo.rule.model.parsegraph.impl.SentenceNode;
+import com.ruleenginedemo.rule.model.parsegraph.impl.UpperLimitHandleNode;
 
 public class SentenceParseGraph implements ParseGraph {
 

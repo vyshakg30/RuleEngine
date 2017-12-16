@@ -17,7 +17,7 @@ public class StringHelper {
 	public static final String DATETIMEFUTURE = "future";
 	public static final String DATETIMEPAST = "past";
 
-	public static final String[] STRINGTYPEVALUES = { "high", "medium", "low" };
+	public static final String[] STRINGTYPEVALUES = { "high", "medium", "low" ,"veryhigh" ,"verylow"};
 	public static final String[] DATETIMETYPEVALUES = { "future", "past" };
 	public static final String[] POSITIVEWORDS = { "should", "must", "always" };
 	public static final String[] NEGATIVEWORDS = { "shouldn't", "mustn't", "never", "not", "can't" };

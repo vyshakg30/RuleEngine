@@ -8,8 +8,8 @@ import com.ruleenginedemo.rule.DecisionTree;
 import com.ruleenginedemo.rule.model.data.ConditionType;
 import com.ruleenginedemo.rule.model.data.RuleCondition;
 import com.ruleenginedemo.rule.model.data.StringHelper;
-import com.ruleenginedemo.rule.tree.impl.Signal;
-import com.ruleenginedemo.rule.tree.impl.ValueType;
+import com.ruleenginedemo.rule.model.tree.impl.Signal;
+import com.ruleenginedemo.rule.model.tree.impl.ValueType;
 
 public class SignalDecisionTree implements DecisionTree {
 
@@ -88,7 +88,7 @@ public class SignalDecisionTree implements DecisionTree {
 		if (ruleCondition.getLimitType() == ConditionType.LOWERLIMIT) {
 
 			Double lowerLimit = integer.getLowerLimitValue();
-			if (lowerLimit == null || val < lowerLimit)
+			if (lowerLimit == null || lowerLimit > val)
 				integer.setLowerLimitValue(new Double(val.doubleValue()));
 			return true;
 
@@ -98,7 +98,7 @@ public class SignalDecisionTree implements DecisionTree {
 
 			Double upperLimit = integer.getUpperLimitValue();
 
-			if (upperLimit == null || val > upperLimit)
+			if (upperLimit == null || upperLimit < val)
 				integer.setUpperLimitValue(new Double(val.doubleValue()));
 
 			return true;
@@ -140,6 +140,7 @@ public class SignalDecisionTree implements DecisionTree {
 	public boolean violatesAnyIntegerRule(Signal signalFromTree, String queryValue) {
 
 		ValueType<Double> integerType = signalFromTree.getIntegerValueType();
+
 		Double queryValueDouble = Double.parseDouble(queryValue);
 
 		if (integerType.getExclusivelyAllowedValueSet().size() > 0
