@@ -3,13 +3,52 @@ A rule engine that accepts a rule iteratively and applies it on a running data s
 Data stream element that violates a rule is displayed on console.
 
 # Getting started
-
 ## Prerequisites
-    Java 8
-    maven
+
+    -Java 8
+    -maven
 
 ## Running
 On root directory of project containing pom.xml, use following commands to build and run.
-    Installing
-    > mvn clean compile package
-    > java -cp target/RuleEngine-0.0.1-SNAPSHOT-jar-with-dependencies.jar com.ruleengine.main.control.DataStreamApp
+    
+    -mvn clean compile package
+    -java -cp target/RuleEngine-0.0.1-SNAPSHOT-jar-with-dependencies.jar com.ruleengine.main.control.DataStreamApp
+
+
+## Rule Formation 
+> **8** Different category of rules are currently accepted .
+       
+       -Integer Type :
+            -upper limit , eg: alt1 should only be above 10
+            -lower limit , eg: alt1 mustn't be below 10
+            -forbidden values , eg: alt1 should should not be 10
+            -Exclusive values , eg: alt1 must only be 10
+       -String Type :
+            -forbidden values , eg: alt1 cannot not be 10
+            -Exclusive values , eg: alt1 should only be only 10
+       -Date Time type :
+            -forbidden values , eg: alt1 must never be in past
+            -Exclusive values , eg: alt1 should only be only in past
+ Note : Refer test cases for finding out more variations.
+
+
+# Discussions
+
+## Conceptual approach
+
+
+## Performance
+
+    
+
+
+
+## Improvements
+    -Create thread pool to process input data stream and further move to SEDA()Staged event driven architecture :(http://web.cecs.pdx.edu/~walpole/class/cs533/winter2009/slides/2b.pdf) which would increase performance.
+    -Increase Rule Types by expanding both DAG and Decision tree.
+    -Establish a dedicated Exception Handling Hierarchy.
+    -Further optimise memory use by managing collection use.
+    -I/O stream thorough memory leak check.
+    -Add logging.
+
+
