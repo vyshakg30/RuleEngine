@@ -16,7 +16,7 @@ On root directory of project containing pom.xml, use following commands to build
 
 
 ## Rule Formation 
-> **8** Different category of rules are currently accepted .
+> **8** Different category of rules are currently accepted.
        
     -Integer Type :
       -upper limit : eg: alt1 should only be above 10
@@ -51,11 +51,9 @@ On root directory of project containing pom.xml, use following commands to build
         Total number edge values = Ev
        Equation : O(R) * [ O(W) + O(log Ev)]
     
-    Decision tree : route process , which could be either while adding a rule or finding a rule
+    Decision tree : route process , which could be either while adding a rule or finding a rule.
         Total number of data signals = N
        Equation : O(N)
-
-
 
 ## Improvements
     -Create thread pool to process input data stream and further move to SEDA(Staged event driven architecture : 
@@ -65,5 +63,3 @@ On root directory of project containing pom.xml, use following commands to build
     -Further optimise memory use by managing collection use.
     -I/O stream thorough memory leak check.
     -Add logging.
-
-
