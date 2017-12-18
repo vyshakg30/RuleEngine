@@ -53,7 +53,8 @@ Parent/Child lineage) that would identify and store rule conditions set forth by
             5.1 Obtaining the data type of of the signal.
             5.2 compare the value of the signal with the values present at its corresponding 
             data type node in the decision tree.
-            5.3 if the comparisions with any previously added condition is successfull a rule would has been violated.
+            5.3 if the comparisions with any previously added condition is successfull a rule would has been
+            violated.
          6.I/O.
         
             
@@ -73,8 +74,9 @@ Parent/Child lineage) that would identify and store rule conditions set forth by
        Equation : O(N)
 
 ## Improvements
-    -Create thread pool to process input data stream and further move to SEDA(Staged event driven architecture : 
-    (http://web.cecs.pdx.edu/~walpole/class/cs533/winter2009/slides/2b.pdf) which would increase performance.
+    -Create thread pool to process input data stream and further move to SEDA(Staged event driven 
+    architecture : (http://web.cecs.pdx.edu/~walpole/class/cs533/winter2009/slides/2b.pdf) which 
+    would increase performance.
     
     -Increase Rule Types by expanding both DAG and Decision tree.
     
