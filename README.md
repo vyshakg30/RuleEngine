@@ -39,7 +39,7 @@ On root directory of project containing pom.xml, use following commands to build
 A Directed Acyclic Words graph [DAWG](https://en.wikipedia.org/wiki/Directed_acyclic_word_graph) and Rule based 
 decision tree [RBDT](publication/221343165_RBDT-1_A_New_Rule-Based_Decision_Tree_Generation_Technique) approaches are primarily followed in this solution.
 
-Each Node of a DAG acts as rule creater and every edge which would contain a set of string values acts contextual 
+Each Node of a DAG acts as rule creater and every edge which would contain a set of string values acts as contextual 
 information identifier(used during parsing rules). Decision tree's synergy with DAG is by having a model(Type of 
 Parent/Child lineage) that would identify and store rule conditions set forth by DAG's Node.
 
