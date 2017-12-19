@@ -71,7 +71,7 @@ Parent/Child lineage) that would identify and store rule conditions set forth by
     
     Decision tree : route process , which could be either while adding a rule or finding a rule.
         Total number of data signals = N
-       Equation : O(N)
+       Equation : O(N log N)
 
 ## Improvements
     -Create thread pool to process input data stream and further move to SEDA(Staged event driven 
